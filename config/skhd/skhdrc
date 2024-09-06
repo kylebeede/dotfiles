@@ -1,0 +1,19 @@
+# Focus Alacritty
+cmd - return : ~/.config/alacritty/find-alacritty.sh
+
+cmd - 1 : osascript -e 'tell application "Chrome" to activate'
+cmd - 2 : osascript -e 'tell application "Slack" to activate'
+cmd - 3 : osascript -e 'tell application "Rider" to activate'
+cmd - 4 : osascript -e 'tell application "Brave" to activate'
+cmd - 5 : osascript -e 'tell application "Outlook" to activate'
+cmd - 6 : osascript -e 'tell application "Android Studio" to activate'
+
+# cmd - 7 : yabai -m space --focus 1
+# cmd - 8 : yabai -m space --focus 2
+
+
+# Map Ctrl+D to Down Arrow when Slack is focused
+# ctrl - j : if [ "$(osascript -e 'tell application "System Events" to get name of (processes where frontmost is true)')" = "Slack" ]; then osascript -e 'tell application "System Events" to key code 125'; else echo "ctrl - j"; fi
+
+# Map Ctrl+U to Up Arrow when Slack is focused
+# ctrl - k : if [ "$(osascript -e 'tell application "System Events" to get name of (processes where frontmost is true)')" = "Slack" ]; then osascript -e 'tell application "System Events" to key code 126'; else echo "ctrl - k"; fi

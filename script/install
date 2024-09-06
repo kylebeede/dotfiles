@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Run all dotfiles installers.
+
+# Exit the script immediately if any command exits with a non-zero status.
+set -e
+
+# Changes directory to the root of the dotfiles
+cd "$(dirname $0)"/..
+
+echo "› brew bundle"
+brew bundle
+
+# Find the installers and run them iteratively
+find . -name install.sh | while read installer ; do sh -c "${installer}" ; done

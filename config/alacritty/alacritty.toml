@@ -1,0 +1,47 @@
+import = ["/Users/kyle.beede/.config/alacritty/themes/themes/nightfly.toml"]
+live_config_reload = true
+
+[env]
+TERM = "alacritty"
+# TERM = "xterm-256color"
+
+[font]
+size = 16.0
+
+[font.bold]
+family = "RobotoMono Nerd Font"
+style = "Bold"
+
+[font.bold_italic]
+family = "RobotoMono Nerd Font"
+style = "Bold Italic"
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.italic]
+family = "RobotoMono Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "RobotoMono Nerd Font"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 0
+
+[window]
+decorations = "full"
+
+[window.dimensions]
+columns = 110
+lines = 35
+
+[window.padding]
+x = 0
+y = 0
+
+# [shell]
+# program = "/bin/zsh"
