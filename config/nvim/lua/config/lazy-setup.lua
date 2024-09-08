@@ -26,7 +26,7 @@ require('lazy').setup({
     install = { colorscheme = { 'nightfly', 'default' } },
     checker = {
         enabled = true,
-        notify = true,
+        notify = false,
         frequency = 604800, -- Check for updates every week
     },
     ui = {
