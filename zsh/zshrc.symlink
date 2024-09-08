@@ -1,0 +1,66 @@
+export DOTFILES="$HOME/.dotfiles"
+
+# Path oh-my-zsh installation
+export ZSH="$DOTFILES/oh-my-zsh"
+
+# all zsh files
+typeset -U config_files
+config_files=($(find $DOTFILES -type f -name "*.zsh" -not -path "$DOTFILES/oh-my-zsh/*"))
+
+# load the env files
+for file in ${(M)config_files:#*/env.zsh}
+do
+  source $file
+done
+
+# Keep private environment variables in ~/.localrc to keep them out of dotfiles repository.
+if [[ -a ~/.localrc ]]
+then
+  source ~/.localrc
+fi
+
+# Various ZSH settings
+#
+# Use hyphen-insensitive completion
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+HYPHEN_INSENSITIVE="true"
+
+# Enable command auto-correction
+ENABLE_CORRECTION="true"
+
+# load path files
+for file in ${(M)config_files:#*/path.zsh}
+do
+  source $file
+done
+
+# load everything but env and path files
+for file in ${config_files:#*/path.zsh:#*/env.zsh}
+do
+  source $file
+done
+
+###############
+#   Plugins   #
+###############
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# TODO add fzf
+plugins=(git starship vi-mode zoxide)
+
+# Load oh-my-zsh
+source $ZSH/oh-my-zsh.sh
+
+# load docker
+source /Users/kyle.beede/.docker/init-zsh.sh || true # Added by Docker Desktop
+
+# load nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# load fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Bun completions
+[ -s "/Users/kyle.beede/.bun/_bun" ] && source "/Users/kyle.beede/.bun/_bun"
+

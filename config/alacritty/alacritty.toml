@@ -1,4 +1,4 @@
-import = ["/Users/kyle.beede/.config/alacritty/themes/themes/nightfly.toml"]
+import = ["/Users/kyle.beede/.config/alacritty/themes/nightfly.toml"]
 live_config_reload = true
 
 [env]

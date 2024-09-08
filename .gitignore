@@ -1,3 +1,4 @@
 /config/tmux/plugins/
 /config/tmux/resurrect/
-/config/alacritty/themes/
+oh-my-zsh/
+.DS_STORE
