@@ -3,3 +3,4 @@ alias ohmyzsh="$EDITOR ~/.dotfiles/oh-my-zsh"
 
 alias reload!='. ~/.zshrc'
 alias cls='clear'
+

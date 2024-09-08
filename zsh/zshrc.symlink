@@ -40,14 +40,8 @@ do
   source $file
 done
 
-###############
-#   Plugins   #
-###############
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# TODO add fzf
-plugins=(git starship vi-mode zoxide)
+# Configure oh-my-zsh plugins
+plugins=(fzf git starship vi-mode zoxide)
 
 # Load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
@@ -57,9 +51,6 @@ source /Users/kyle.beede/.docker/init-zsh.sh || true # Added by Docker Desktop
 
 # load nvm
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
-# load fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Bun completions
 [ -s "/Users/kyle.beede/.bun/_bun" ] && source "/Users/kyle.beede/.bun/_bun"
