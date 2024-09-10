@@ -11,11 +11,9 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = 'nvim_lsp', group_index = 1 },
         { name = 'path', group_index = 1 },
+        { name = 'copilot', group_index = 1 },
         -- { name = 'luasnip' },
-    }, {
         { name = 'buffer', group_index = 2 },
-    }, {
-        { name = 'copilot', group_index = 3 },
         {
             name = 'lazydev',
             group_index = 0, -- set group index to 0 to skip loading LuaLS completions
