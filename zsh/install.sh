@@ -4,5 +4,5 @@ export ZSH="$HOME/.dotfiles/oh-my-zsh"
 if [ ! -d "$HOME/.dotfiles/oh-my-zsh" ]; then
   (curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh -s -- --unattended --keep-zshrc)
 else
-  echo "oh-my-zsh is already installed."
+  echo "\t oh-my-zsh is already installed."
 fi

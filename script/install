@@ -12,4 +12,9 @@ echo "› brew bundle"
 brew bundle
 
 # Find the installers and run them iteratively
-find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
+echo "Running installers"
+find . -path './oh-my-zsh' -prune -o -name install.sh -print | while read installer; do
+  echo "Running ${installer}"
+  sh -c "${installer}"
+done
+echo "Finished installing"
