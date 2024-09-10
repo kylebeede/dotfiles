@@ -228,6 +228,12 @@ require('which-key').add({
         desc = 'File [E]xplorer',
         icon = icons.kind.Folder,
     },
+    {
+        '<leader>/',
+        '<cmd>lua require("flash").jump()<cr>',
+        desc = 'Flash',
+        icon = icons.ui.Search,
+    },
 
     --                                    ╭────╮
     --                                    │ AI │

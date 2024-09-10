@@ -13,6 +13,10 @@ return {
 			{ "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
 			{ "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
 		},
+        config = function()
+            local theme = require('config.theme')
+            vim.cmd(string.format('highlight FlashLabel gui=none guifg=%s guibg=%s', theme.flashLabelFg, theme.flashLabelBg))
+        end,
     },
 
     -- Adds git related signs to the gutter,
