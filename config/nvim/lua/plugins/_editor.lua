@@ -15,7 +15,7 @@ return {
 		},
         config = function()
             local theme = require('config.theme')
-            vim.cmd(string.format('highlight FlashLabel gui=none guifg=%s guibg=%s', theme.flashLabelFg, theme.flashLabelBg))
+            vim.cmd(string.format('highlight FlashLabel gui=none guifg=%s guibg=%s', theme.highlights.flashLabelFg, theme.highlights.flashLabelBg))
         end,
     },
 
