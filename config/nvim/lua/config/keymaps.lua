@@ -154,9 +154,9 @@ end
 
 -- Prompts for remote/branch before calling fetch_and_diffview
 local function prompt_and_fetch_and_diffview()
-    vim.ui.input({ prompt = 'Enter remote/branch (e.g., upstream/develop): ' }, function(input)
+    vim.ui.input({ prompt = 'Enter remote:branch (e.g., upstream:develop): ' }, function(input)
         if input then
-            local remote, branch = input:match('([^/]+)/([^/]+)')
+            local remote, branch = input:match('([^/]+):([^/]+)')
             fetch_and_diffview(remote, branch)
         end
     end)
