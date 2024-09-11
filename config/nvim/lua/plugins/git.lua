@@ -18,29 +18,12 @@ return {
         cmd = 'DiffviewOpen',
         dependencies = { 'Mofiqul/vscode.nvim' },
         config = function()
-            -- Left panel
-            -- "DiffChange:DiffAddAsDelete",
-            -- "DiffText:DiffDeleteText",
+            local theme = require('config.theme')
+            vim.cmd(string.format('highlight DiffAdd gui=none guifg=none guibg=%s', theme.highlights.diffAddBg))
+            vim.cmd(string.format('highlight DiffAddText gui=none guifg=%s guibg=%s', theme.highlights.diffAddText, theme.highlights.diffAddFg))
 
-            -- Right panel
-            -- "DiffChange:DiffAdd",
-            -- "DiffText:DiffAddText",
-
-            -- local theme = require 'vscode'
-            -- theme.load
-            vim.cmd([[highlight DiffAdd gui=none guifg=none guibg=#0D311E]])
-            vim.cmd([[highlight DiffChange gui=none guifg=none guibg=#272D43]])
-            vim.cmd([[highlight DiffText gui=none guifg=none guibg=#394b70]])
-            -- vim.cmd [[highlight DiffDelete gui=none guifg=none guibg=#470909]]
-            vim.cmd([[highlight DiffDelete gui=none guifg=none guibg=#360707]])
-
-            vim.cmd([[highlight DiffAddText gui=none guifg=none guibg=#1D7246]])
-            -- vim.cmd [[highlight DiffAddAsDelete gui=none guifg=none guibg=#3F2D3D]]
-            vim.cmd([[highlight DiffDeleteText gui=none guifg=none guibg=#5D1D1D]])
-
-            -- vim.cmd [[highlight DiffviewDiffAddAsDelete guibg=#3f2d3d gui=none guifg=none]]
-            -- vim.cmd [[highlight DiffviewDiffAddAsDelete guibg=#3f2d3d gui=none guifg=none]]
-            -- vim.cmd [[highlight DiffviewDiffDelete gui=none guifg=#3B4252 guibg=none]]
+            vim.cmd(string.format('highlight DiffAddAsDelete gui=none guifg=none guibg=%s', theme.highlights.diffDeleteBg))
+            vim.cmd(string.format('highlight DiffDeleteText gui=none guifg=%s guibg=%s', theme.highlights.diffDeleteText, theme.highlights.diffDeleteFg))
 
             require('diffview').setup({
                 enhanced_diff_hl = true,
