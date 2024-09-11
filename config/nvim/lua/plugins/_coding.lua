@@ -45,6 +45,7 @@ return {
                 'lazy',
                 'help',
                 'checkhealth',
+                'NvimTree',
             },
             modes_denylist = { 'v', '\22' },
         },
