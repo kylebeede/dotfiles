@@ -54,7 +54,7 @@ local servers = {
     lemminx = {
         filetypes = { 'xml', 'config' },
     },
-    tsserver = {},
+    ts_ls = {},
     omnisharp = {
         filetypes = { 'cs', 'vb' },
         settings = {
