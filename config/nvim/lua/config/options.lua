@@ -19,6 +19,8 @@ vim.opt.shiftwidth = 4
 
 vim.opt.scrolloff = 12
 
+vim.opt.conceallevel = 1
+
 -- Set highlight on search
 vim.o.hlsearch = false
 
