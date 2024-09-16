@@ -50,14 +50,6 @@ local function toggle_colorcolumn()
     end
 end
 
--- https://github.com/nvim-tree/nvim-tree.lua/issues/2520#issuecomment-1801342927
-local function toggle_nvim_tree()
-    if vim.bo.filetype == 'TelescopePrompt' then
-        require('telescope.actions').close(vim.api.nvim_get_current_buf())
-    end
-    vim.cmd('NvimTreeToggle')
-end
-
 local function toggle_statusline()
     if vim.o.laststatus == 0 then
         vim.o.laststatus = 2
@@ -224,7 +216,7 @@ require('which-key').add({
     },
     {
         '<leader>e',
-        toggle_nvim_tree,
+        '<cmd>NvimTreeToggle<cr>',
         desc = 'File [E]xplorer',
         icon = icons.kind.Folder,
     },
