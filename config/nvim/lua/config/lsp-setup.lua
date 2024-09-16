@@ -35,7 +35,19 @@ local servers = {
     lua_ls = {
         settings = {
             Lua = {
-                telemetry = { enable = false },
+                runtime = {
+                    version = 'Lua 5.1',
+                },
+                -- telemetry = { enable = false },
+                workspace = {
+                    library = {
+                        '$VIMRUNTIME/lua/vim',
+                        '${3rd}/luv/library',
+                    },
+                },
+                completion = {
+                    callSnippet = 'Replace',
+                },
             },
         },
     },
