@@ -1,5 +1,10 @@
 local icons = require('icons')
 
+local function is_directory(path)
+    local stat = vim.loop.fs_stat(path)
+    return stat and stat.type == 'directory'
+end
+
 local function toggle_virtual_text()
     ---@diagnostic disable-next-line: undefined-field
     local current_value = vim.diagnostic.config().virtual_text
@@ -63,9 +68,8 @@ _G.current_worktree_path = nil
 
 -- Remove the worktree if it exists
 local function clear_worktree(logMessages)
-    if _G.current_worktree_path then
+    if _G.current_worktree_path and is_directory(_G.current_worktree_path) then
         local remove_command = string.format('git worktree remove %s', _G.current_worktree_path)
-        print(remove_command)
         vim.fn.system(remove_command)
 
         -- Check if the remove command was successful
@@ -108,12 +112,20 @@ local function fetch_and_diffview(remote, branch)
 
             -- Check if the fetch command was successful
             if vim.v.shell_error == 0 then
+                local home_dir = os.getenv('HOME')
+                local worktree_name = string.format('%s_%s', remote, branch)
+                local worktree_path = string.format('%s/Code/worktrees/%s', home_dir, worktree_name)
+
+                -- Check if worktree dir exists
+                -- This can happen if nvim is closed without quitting review first
+                if _G.current_worktree_path == nil and is_directory(worktree_path) then
+                    _G.current_worktree_path = worktree_path
+                end
+
                 -- Remove worktree if it exists
                 clear_worktree(false)
 
                 -- Create a new worktree
-                local home_dir = os.getenv('HOME')
-                local worktree_path = string.format('%s/Code/worktrees/%s_%s', home_dir, remote, branch)
                 local worktree_command = string.format('git worktree add %s %s/%s', worktree_path, remote, branch)
                 vim.fn.system(worktree_command)
 
@@ -124,7 +136,6 @@ local function fetch_and_diffview(remote, branch)
 
                     -- Run the DiffviewOpen command with the specified remote and branch
                     local diffview_command = string.format('DiffviewOpen -C%s origin/master...HEAD --imply-local', worktree_path)
-                    print(diffview_command)
                     vim.cmd(diffview_command)
                 else
                     -- Print an error message if the worktree creation failed
@@ -156,6 +167,7 @@ end
 
 -- Function to close the review and remove the worktree
 local function close_review()
+    -- TODO: If review is closed very soon after opening this errors: `client omnisharp quit with exit code 0 and signal 6`
     vim.cmd('DiffviewClose')
     clear_worktree(true)
 end
