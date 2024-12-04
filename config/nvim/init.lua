@@ -4,7 +4,7 @@ require('config.lazy-setup')
 
 require('config.lsp-setup')
 
-require('config.cmp-setup')
+-- require('config.cmp-setup')
 
 require('config.autocmd')
 
