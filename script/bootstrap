@@ -29,6 +29,16 @@ fail () {
   exit
 }
 
+# Ensure parent directories exist
+ensure_directory_exists () {
+  local dir=$1
+  if [ ! -d "$(dirname "$dir")" ]; then
+    info "creating parent directory for $dir"
+    mkdir -p "$(dirname "$dir")"
+    success "created parent directory for $dir"
+  fi
+}
+
 # Checks for git/gitconfig.local.symlink
 # If it doesn't, create it.
 setup_gitconfig () {
@@ -59,6 +69,9 @@ link_file () {
 
   local overwrite= backup= skip=
   local action=
+
+  # Ensure parent directory exists
+  ensure_directory_exists "$dst"
 
   if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]
   then
@@ -135,6 +148,9 @@ link_directory () {
 
   skip=false
 
+  # Ensure parent directory exists
+  ensure_directory_exists "$dst"
+
   if [ -d "$dst" -o -L "$dst" ]
   then
     if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
@@ -192,6 +208,31 @@ link_directory () {
       fail "failed to link $src to $dst"
     fi
   fi
+}
+
+# Setup basic directory structure
+setup_directory_structure() {
+  info 'setting up directory structure'
+  
+  # Ensure ~/.config exists
+  if [ ! -d "$HOME/.config" ]; then
+    info "creating $HOME/.config"
+    mkdir -p "$HOME/.config"
+    success "created $HOME/.config"
+  fi
+  
+  # Dynamically find all config directories that need to be created
+  for src in $(find -H "$DOTFILES_ROOT/config" -mindepth 1 -maxdepth 1 -type d -not -path '*.git*')
+  do
+    dst="$HOME/.config/$(basename "$src")"
+    # Only create parent directory, not the actual target
+    parent_dir="$(dirname "$dst")"
+    if [ ! -d "$parent_dir" ]; then
+      info "creating $parent_dir"
+      mkdir -p "$parent_dir"
+      success "created $parent_dir"
+    fi
+  done
 }
 
 # Install dotfiles using found .symlink files

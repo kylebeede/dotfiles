@@ -3,6 +3,7 @@ export PATH="/Users/kyle.beede/.local/bin:$PATH"
 export PATH="/usr/local:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH="/opt/homebrew/bin/brew:$PATH"
 
 # Bun
 export PATH="$BUN_INSTALL/bin:$PATH"

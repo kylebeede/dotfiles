@@ -1,6 +1,7 @@
 cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
+tap 'koekeishiya/formulae'
 
 cask 'alacritty'
 
@@ -8,11 +9,14 @@ brew 'coreutils'
 brew 'fzf'
 brew 'git'
 # brew 'hub'
+brew 'node'
 brew 'nvim'
+brew 'nvm'
 brew 'redis'
 brew 'skhd'
 brew 'starship'
 brew 'tmux'
 brew 'wget'
 brew 'yarn'
+brew 'zoxide'
 brew 'zsh'
