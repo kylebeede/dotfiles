@@ -10,6 +10,7 @@ cask 'postman'
 cask 'rider'
 cask 'visual-studio-code'
 
+brew 'bash'
 brew 'coreutils'
 brew 'fzf'
 brew 'git'

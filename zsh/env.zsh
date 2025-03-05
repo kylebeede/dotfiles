@@ -15,6 +15,7 @@ export MsBuildSDKsPath="/usr/local/Cellar/dotnet/7.0.100/libexec/sdk"
 export BUN_INSTALL="$HOME/.bun"
 export JAVA_HOME='/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home'
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # Set Starship config
 export STARSHIP_CONFIG=$DOTFILES/config/starship/starship.toml

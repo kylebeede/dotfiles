@@ -47,7 +47,8 @@ plugins=(fzf git starship vi-mode zoxide)
 source $ZSH/oh-my-zsh.sh
 
 # load docker
-source /Users/kyle.beede/.docker/init-zsh.sh || true # Added by Docker Desktop
+# TODO: add this back after installing docker
+# source /Users/kyle.beede/.docker/init-zsh.sh || true # Added by Docker Desktop
 
 # load nvm
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"

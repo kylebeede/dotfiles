@@ -7,5 +7,4 @@ export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/bin/brew:$PATH"
 export PATH="$JAVA_HOME:$PATH"
 
-# Bun
-export PATH="$BUN_INSTALL/bin:$PATH"
+export XDG_CONFIG_HOME="$HOME/.config"
