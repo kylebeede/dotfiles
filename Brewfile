@@ -4,6 +4,11 @@ tap 'homebrew/bundle'
 tap 'koekeishiya/formulae'
 
 cask 'alacritty'
+cask 'docker'
+cask 'mysqlworkbench'
+cask 'postman'
+cask 'rider'
+cask 'visual-studio-code'
 
 brew 'coreutils'
 brew 'fzf'
