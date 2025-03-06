@@ -5,6 +5,7 @@ tap 'koekeishiya/formulae'
 
 cask 'alacritty'
 cask 'docker'
+cask 'dotnet'
 cask 'mysqlworkbench'
 cask 'postman'
 cask 'rider'

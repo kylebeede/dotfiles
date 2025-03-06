@@ -9,9 +9,10 @@ export LDFLAGS="-L/usr/local/opt/ruby/lib"
 export CPPFLAGS="-I/usr/local/opt/ruby/include"
 export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
 export NVM_DIR="$HOME/.nvm"
-export DOTNET_ROOT="/usr/local/Cellar/dotnet/7.0.100/libexec"
-export DOTNET_VERSION="7.0.100"
-export MsBuildSDKsPath="/usr/local/Cellar/dotnet/7.0.100/libexec/sdk"
+
+# .NET Configuration
+export DOTNET_ROOT="/usr/local/share/dotnet"
+
 export BUN_INSTALL="$HOME/.bun"
 export JAVA_HOME='/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home'
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
