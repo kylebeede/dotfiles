@@ -7,38 +7,15 @@ cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd -P)
 
 set -e
-
 echo ''
 
 # helper functions
-info () {
-  printf "\r  [ \033[00;34m..\033[0m ] $1\n"
-}
+info () { printf "\r  [ \033[00;34m..\033[0m ] $1\n"; }
+user () { printf "\r  [ \033[0;33m??\033[0m ] $1\n"; }
+success () { printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"; }
+fail () { printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"; echo ''; exit 1; }
 
-user () {
-  printf "\r  [ \033[0;33m??\033[0m ] $1\n"
-}
-
-success () {
-  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
-}
-
-fail () {
-  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
-  echo ''
-  exit
-}
-
-# Ensure parent directories exist
-ensure_directory_exists () {
-  local dir=$1
-  if [ ! -d "$(dirname "$dir")" ]; then
-    info "creating parent directory for $dir"
-    mkdir -p "$(dirname "$dir")"
-    success "created parent directory for $dir"
-  fi
-}
-
+# Setup Git configuration
 # Checks for git/gitconfig.local.symlink
 # If it doesn't, create it.
 setup_gitconfig () {
@@ -63,7 +40,18 @@ setup_gitconfig () {
   fi
 }
 
-# Symlink a src file to a dst file
+# Ensure parent directories exist
+ensure_directory_exists () {
+  local dir=$1
+  if [ ! -d "$(dirname "$dir")" ]; then
+    info "creating parent directory for $dir"
+    mkdir -p "$(dirname "$dir")"
+    success "created parent directory for $dir"
+  fi
+}
+
+
+# Symlink a source file to a destination file
 link_file () {
   local src=$1 dst=$2
 
@@ -142,7 +130,7 @@ link_file () {
   fi
 }
 
-# Symlinks a directory
+# Symlink a directory
 link_directory () {
   local src=$1 dst=$2
 
@@ -210,7 +198,7 @@ link_directory () {
   fi
 }
 
-# Setup basic directory structure
+# Setup directory structure
 setup_directory_structure() {
   info 'setting up directory structure'
   
@@ -236,7 +224,7 @@ setup_directory_structure() {
 }
 
 # Install dotfiles using found .symlink files
-# Also installs directories in /config to ~/.config
+# Install directories in /config to ~/.config
 install_dotfiles () {
   info 'installing dotfiles'
 
@@ -257,20 +245,35 @@ install_dotfiles () {
   done
 }
 
-setup_gitconfig
-install_dotfiles
-
-# On Mac, install and setup homebrew.
-if [ "$(uname -s)" == "Darwin" ]
-then
-  info "installing dependencies"
-  if source bin/dot | while read -r data; do info "$data"; done
-  then
-    success "dependencies installed"
-  else
-    fail "error installing dependencies"
+# Setup macOS-specific tools
+setup_macos() {
+  if [ "$(uname -s)" == "Darwin" ]; then
+    info "Setting up macOS environment"
+    
+    # Install Homebrew if it's not already installed
+    if ! command -v brew >/dev/null 2>&1; then
+      info "Installing Homebrew"
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      success "Homebrew installed"
+    fi
   fi
-fi
+}
 
-echo ''
-echo '  All installed!'
+run_all() {
+  setup_gitconfig
+  setup_directory_structure
+  install_dotfiles
+  setup_macos
+  
+  # Run the install script if it exists
+  if [ -x "script/install" ]; then
+    info "Running install script"
+    script/install
+  fi
+  
+  echo ''
+  echo '  All installed!'
+}
+
+# Run the bootstrap process
+run_all

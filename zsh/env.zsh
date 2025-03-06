@@ -5,17 +5,16 @@ else
   export EDITOR='nvim'
 fi
 
-export LDFLAGS="-L/usr/local/opt/ruby/lib"
-export CPPFLAGS="-I/usr/local/opt/ruby/include"
-export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
+# Node version manager
 export NVM_DIR="$HOME/.nvm"
 
 # .NET Configuration
 export DOTNET_ROOT="/usr/local/share/dotnet"
 
-export BUN_INSTALL="$HOME/.bun"
 export JAVA_HOME='/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home'
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+
+# Set location for config files
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # Set Starship config

@@ -1,8 +1,11 @@
+# Brewfile
 cask_args appdir: '/Applications'
 
+# Taps 
 tap 'homebrew/bundle'
-tap 'koekeishiya/formulae'
+tap 'koekeishiya/formulae' # For skhd
 
+# GUI Applications
 cask 'alacritty'
 cask 'docker'
 cask 'dotnet'
@@ -11,22 +14,27 @@ cask 'postman'
 cask 'rider'
 cask 'visual-studio-code'
 
+# Development Tools
 brew 'bash'
 brew 'coreutils'
 brew 'fzf'
 brew 'git'
-# brew 'hub'
 brew 'node'
 brew 'nvim'
 brew 'nvm'
 brew 'openjdk'
 brew 'redis'
+brew 'yarn'
+
+# Shell Enhancements
 brew 'ripgrep'
-brew 'skhd'
 brew 'starship'
+brew 'zoxide'
+brew 'zsh'
+
+# System Utilities
+brew 'skhd'
 brew 'syncthing'
 brew 'tmux'
 brew 'wget'
-brew 'yarn'
-brew 'zoxide'
-brew 'zsh'
+
