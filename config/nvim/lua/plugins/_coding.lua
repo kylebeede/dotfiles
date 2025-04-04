@@ -1,185 +1,192 @@
 local function split(inputstr, sep)
-    if sep == nil then
-        sep = '%s'
-    end
-    local t = {}
-    for str in string.gmatch(inputstr, '([^' .. sep .. ']+)') do
-        table.insert(t, str)
-    end
-    return t
+	if sep == nil then
+		sep = '%s'
+	end
+	local t = {}
+	for str in string.gmatch(inputstr, '([^' .. sep .. ']+)') do
+		table.insert(t, str)
+	end
+	return t
 end
 
 return {
-    -- Autocompletion
-    {
-        'hrsh7th/nvim-cmp',
-        event = 'InsertEnter',
-        dependencies = {
-            -- Adds LSP completion capabilities
-            'hrsh7th/cmp-nvim-lsp',
+	-- Autocompletion
+	{
+		'hrsh7th/nvim-cmp',
+		event = 'InsertEnter',
+		dependencies = {
+			-- Adds LSP completion capabilities
+			'hrsh7th/cmp-nvim-lsp',
 
-            -- Adds a number of user-friendly snippets
-            -- 'rafamadriz/friendly-snippets',
-        },
-        config = function()
-            local cmp = require('cmp')
-            local winhighlight = {
-                winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel',
-            }
-            -- local defaults = require('cmp.config.default')()
+			-- Adds a number of user-friendly snippets
+			-- 'rafamadriz/friendly-snippets',
+		},
+		config = function()
+			local cmp = require('cmp')
+			local winhighlight = {
+				winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel',
+			}
+			-- local defaults = require('cmp.config.default')()
 
-            cmp.setup({
-                sources = cmp.config.sources({
-                    { name = 'nvim_lsp', group_index = 1 },
-                    { name = 'path', group_index = 1 },
-                    -- { name = 'copilot', group_index = 1 },
-                    { name = 'buffer', group_index = 2 },
-                    { name = 'lazydev', group_index = 2 },
-                }),
-                mapping = cmp.mapping.preset.insert({
-                    ['<C-n>'] = cmp.mapping.select_next_item(),
-                    ['<C-p>'] = cmp.mapping.select_prev_item(),
-                    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-                    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-                    ['<C-l>'] = cmp.mapping.complete({}),
-                    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-                    ['<S-CR>'] = cmp.mapping.confirm({
-                        behavior = cmp.ConfirmBehavior.Replace,
-                        select = true,
-                    }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-                    ['<C-CR>'] = function(fallback)
-                        cmp.abort()
-                        fallback()
-                    end,
-                    ['<Tab>'] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        -- elseif luasnip.expand_or_locally_jumpable() then
-                        --   luasnip.expand_or_jump()
-                        else
-                            fallback()
-                        end
-                    end, { 'i', 's' }),
-                    ['<S-Tab>'] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        -- elseif luasnip.locally_jumpable(-1) then
-                        --   luasnip.jump(-1)
-                        else
-                            fallback()
-                        end
-                    end, { 'i', 's' }),
-                }),
-                window = {
-                    completion = cmp.config.window.bordered(winhighlight),
-                    documentation = cmp.config.window.bordered(winhighlight),
-                },
-            })
-        end,
-    },
+			cmp.setup({
+				sources = cmp.config.sources({
+					{ name = 'nvim_lsp', group_index = 1 },
+					{ name = 'path',     group_index = 1 },
+					-- { name = 'copilot', group_index = 1 },
+					{ name = 'buffer',   group_index = 2 },
+					{ name = 'lazydev',  group_index = 2 },
+				}),
+				mapping = cmp.mapping.preset.insert({
+					['<C-n>'] = cmp.mapping.select_next_item(),
+					['<C-p>'] = cmp.mapping.select_prev_item(),
+					['<C-d>'] = cmp.mapping.scroll_docs(-4),
+					['<C-f>'] = cmp.mapping.scroll_docs(4),
+					['<C-l>'] = cmp.mapping.complete({}),
+					['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+					['<S-CR>'] = cmp.mapping.confirm({
+						behavior = cmp.ConfirmBehavior.Replace,
+						select = true,
+					}), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+					['<C-CR>'] = function(fallback)
+						cmp.abort()
+						fallback()
+					end,
+					['<Tab>'] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_next_item()
+							-- elseif luasnip.expand_or_locally_jumpable() then
+							--   luasnip.expand_or_jump()
+						else
+							fallback()
+						end
+					end, { 'i', 's' }),
+					['<S-Tab>'] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_prev_item()
+							-- elseif luasnip.locally_jumpable(-1) then
+							--   luasnip.jump(-1)
+						else
+							fallback()
+						end
+					end, { 'i', 's' }),
+				}),
+				window = {
+					completion = cmp.config.window.bordered(winhighlight),
+					documentation = cmp.config.window.bordered(winhighlight),
+				},
+			})
+		end,
+	},
 
-    {
-        'RRethy/vim-illuminate',
-        event = { 'BufReadPre', 'BufNewFile' },
-        opts = {
-            delay = 350,
-            under_cursor = false,
-            min_count_to_highlight = 1,
-            large_file_cutoff = 2000, -- lines
-            large_file_overrides = {
-                providers = {
-                    'lsp', -- still allow lsp to provide references for large files
-                },
-            },
-            filetypes_denylist = {
-                'alpha',
-                'dirbuf',
-                'dirvish',
-                'fugitive',
-                'mason',
-                'lazy',
-                'help',
-                'checkhealth',
-                'NvimTree',
-            },
-            modes_denylist = { 'v', '\22' },
-        },
-        config = function(_, opts)
-            require('illuminate').configure(opts)
+	{
+		'RRethy/vim-illuminate',
+		event = { 'BufReadPre', 'BufNewFile' },
+		opts = {
+			delay = 350,
+			under_cursor = false,
+			min_count_to_highlight = 1,
+			large_file_cutoff = 2000, -- lines
+			large_file_overrides = {
+				providers = {
+					'lsp', -- still allow lsp to provide references for large files
+				},
+			},
+			filetypes_denylist = {
+				'alpha',
+				'dirbuf',
+				'dirvish',
+				'fugitive',
+				'mason',
+				'lazy',
+				'help',
+				'checkhealth',
+				'NvimTree',
+			},
+			modes_denylist = { 'v', '\22' },
+		},
+		config = function(_, opts)
+			require('illuminate').configure(opts)
 
-            local function map(key, dir, buffer)
-                vim.keymap.set('n', key, function()
-                    require('illuminate')['goto_' .. dir .. '_reference'](false)
-                end, { desc = dir:sub(1, 1):upper() .. dir:sub(2) .. ' Reference', buffer = buffer })
-            end
+			local function map(key, dir, buffer)
+				vim.keymap.set('n', key, function()
+					require('illuminate')['goto_' .. dir .. '_reference'](false)
+				end, { desc = dir:sub(1, 1):upper() .. dir:sub(2) .. ' Reference', buffer = buffer })
+			end
 
-            map(']]', 'next')
-            map('[[', 'prev')
+			map(']]', 'next')
+			map('[[', 'prev')
 
-            -- also set it after loading ftplugins, since a lot overwrite [[ and ]]
-            vim.api.nvim_create_autocmd('FileType', {
-                callback = function()
-                    local buffer = vim.api.nvim_get_current_buf()
-                    map(']]', 'next', buffer)
-                    map('[[', 'prev', buffer)
-                end,
-            })
+			-- also set it after loading ftplugins, since a lot overwrite [[ and ]]
+			vim.api.nvim_create_autocmd('FileType', {
+				callback = function()
+					local buffer = vim.api.nvim_get_current_buf()
+					map(']]', 'next', buffer)
+					map('[[', 'prev', buffer)
+				end,
+			})
 
-            vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
-            vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
-            vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
-        end,
-        keys = {
-            { ']]', desc = 'Next Reference' },
-            { '[[', desc = 'Prev Reference' },
-        },
-    },
+			vim.api.nvim_set_hl(0, 'IlluminatedWordText', { link = 'Visual' })
+			vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'Visual' })
+			vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
+		end,
+		keys = {
+			{ ']]', desc = 'Next Reference' },
+			{ '[[', desc = 'Prev Reference' },
+		},
+	},
 
-    {
-        'kylechui/nvim-surround',
-        version = '*', -- Use for stability; omit to use `main` branch for the latest features
-        event = 'VeryLazy',
-        config = function()
-            require('nvim-surround').setup({
-                -- Configuration here, or leave empty to use defaults
-            })
-        end,
-    },
+	{
+		'kylechui/nvim-surround',
+		version = '*', -- Use for stability; omit to use `main` branch for the latest features
+		event = 'VeryLazy',
+		config = function()
+			require('nvim-surround').setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end,
+	},
 
-    {
-        'windwp/nvim-autopairs',
-        event = 'InsertEnter',
-        config = function()
-            local npairs = require('nvim-autopairs')
-            local Rule = require('nvim-autopairs.rule')
-            local cond = require('nvim-autopairs.conds')
+	{
+		'windwp/nvim-autopairs',
+		event = 'InsertEnter',
+		config = function()
+			local npairs = require('nvim-autopairs')
+			local Rule = require('nvim-autopairs.rule')
+			local cond = require('nvim-autopairs.conds')
 
-            npairs.setup({})
+			npairs.setup({})
 
-            npairs.add_rules({
-                Rule('<[a-zA-Z]*>$', '', { 'react', 'typescriptreact' })
-                    :use_regex(true)
-                    -- :with_pair(cond.not_after_regex("("))
-                    :replace_endpair(function(opts)
-                        print(vim.inspect(opts))
-                        local prev_char_split = split(opts.prev_char, '<')
-                        print(vim.inspect(prev_char_split))
-                        return '</' .. prev_char_split[2]
-                    end),
-            })
-        end,
-    },
+			npairs.add_rules({
+				Rule('<[a-zA-Z]*>$', '', { 'react', 'typescriptreact' })
+					:use_regex(true)
+				-- :with_pair(cond.not_after_regex("("))
+					:replace_endpair(function(opts)
+						print(vim.inspect(opts))
+						local prev_char_split = split(opts.prev_char, '<')
+						print(vim.inspect(prev_char_split))
+						return '</' .. prev_char_split[2]
+					end),
+			})
+		end,
+	},
 
-    {
-        'folke/lazydev.nvim',
-        ft = 'lua', -- only load on lua files
-        opts = {
-            library = {
-                -- See the configuration section for more details
-                -- Load luvit types when the `vim.uv` word is found
-                { path = 'luvit-meta/library', words = { 'vim%.uv' } },
-            },
-        },
-    },
-    { 'Bilal2453/luvit-meta', lazy = true }, -- optional `vim.uv` typings
+	{
+		'folke/lazydev.nvim',
+		ft = 'lua', -- only load on lua files
+		opts = {
+			library = {
+				-- See the configuration section for more details
+				-- Load luvit types when the `vim.uv` word is found
+				{ path = 'luvit-meta/library', words = { 'vim%.uv' } },
+			},
+		},
+	},
+	{ 'Bilal2453/luvit-meta', lazy = true }, -- optional `vim.uv` typings
+	{
+		"ray-x/lsp_signature.nvim",
+		event = "InsertEnter",
+		opts = {
+			hint_enable = false,
+		},
+	}
 }

@@ -1,8 +1,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- TODO: research this
--- vim.loader.enable()
+vim.loader.enable()
 
 -- disable netrw (for nvim-tree)
 vim.g.loaded_netrw = 1
@@ -57,9 +56,9 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.cursorline = true
 
 vim.filetype.add({
-    extension = {
-        fsd = 'fsd',
-    },
+  extension = {
+    fsd = 'fsd',
+  },
 })
 
 -- Enable folding
