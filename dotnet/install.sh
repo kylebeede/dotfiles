@@ -5,7 +5,7 @@
 set -e
 
 # Define the SDK version needed
-DOTNET_SDK_VERSION="8.0.203"
+DOTNET_SDK_VERSION="8.0.406"
 DOTNET_INSTALL_DIR="/usr/local/share/dotnet"
 
 echo "    › Installing .NET SDK $DOTNET_SDK_VERSION"
