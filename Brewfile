@@ -11,6 +11,7 @@ cask 'docker'
 cask 'dotnet'
 cask 'mysqlworkbench'
 cask 'postman'
+cask 'rectangle'
 cask 'rider'
 cask 'visual-studio-code'
 
