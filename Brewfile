@@ -4,6 +4,7 @@ cask_args appdir: '/Applications'
 # Taps 
 tap 'homebrew/bundle'
 tap 'koekeishiya/formulae' # For skhd
+tap 'oven-sh/bun' # Bun
 
 # GUI Applications
 cask 'alacritty'
@@ -17,6 +18,7 @@ cask 'visual-studio-code'
 
 # Development Tools
 brew 'bash'
+brew 'bun'
 brew 'coreutils'
 brew 'fzf'
 brew 'git'
